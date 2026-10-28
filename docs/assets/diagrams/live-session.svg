@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="720" viewBox="0 0 1200 720" role="img" aria-labelledby="title desc">
+  <title id="title">One question, from credential to score</title>
+  <desc id="desc">The browser asks the API for a live session. The API checks the owner and the monthly voice quota under a per-user lock, closes any other open session, builds the interviewer's instructions from the stored plan, and asks the provider for a short-lived credential with those instructions inside. The browser connects to the provider (OpenAI through the API's SDP relay, which records the call id; Gemini directly with a locked ephemeral token) and the conversation runs. When the interviewer calls end_question, or the candidate presses Next question, or the time runs out, the browser ends the session (the API books server-measured seconds and hangs up an OpenAI call) and posts the question's transcript or code. A worker job scores the answer with the text model and writes the ratings and feedback.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 10 5 0 10z" fill="#4B5163"/></marker>
+    <marker id="v" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 10 5 0 10z" fill="#6D52F0"/></marker>
+    <style>
+      .bg{fill:#FFFFFF}
+      .hd{fill:#F1EEFF;stroke:#B9ACF7;stroke-width:1.2}
+      .h{font:600 15px Inter,Segoe UI,Helvetica,Arial,sans-serif;fill:#111322}
+      .t{font:13px Inter,Segoe UI,Helvetica,Arial,sans-serif;fill:#30364A}
+      .n{font:12px Inter,Segoe UI,Helvetica,Arial,sans-serif;fill:#6B7280}
+      .life{stroke:#D8D8E6;stroke-width:1.4;stroke-dasharray:4 5}
+      .m{stroke:#4B5163;stroke-width:1.4;fill:none}
+      .mv{stroke:#6D52F0;stroke-width:2.2;fill:none}
+      .note{fill:#FAFAFD;stroke:#E4E4EE}
+    </style>
+  </defs>
+  <rect class="bg" width="1200" height="720" rx="18"/>
+  <text class="h" x="40" y="42" style="font-size:20px">One question, from credential to score</text>
+
+  <g>
+    <rect class="hd" x="60" y="70" width="170" height="44" rx="10"/><text class="h" x="145" y="98" text-anchor="middle">Browser (room)</text>
+    <rect class="hd" x="370" y="70" width="170" height="44" rx="10"/><text class="h" x="455" y="98" text-anchor="middle">API</text>
+    <rect class="hd" x="680" y="70" width="190" height="44" rx="10"/><text class="h" x="775" y="98" text-anchor="middle">Realtime provider</text>
+    <rect class="hd" x="980" y="70" width="170" height="44" rx="10"/><text class="h" x="1065" y="98" text-anchor="middle">Worker</text>
+    <line class="life" x1="145" y1="114" x2="145" y2="690"/>
+    <line class="life" x1="455" y1="114" x2="455" y2="690"/>
+    <line class="life" x1="775" y1="114" x2="775" y2="690"/>
+    <line class="life" x1="1065" y1="114" x2="1065" y2="690"/>
+  </g>
+
+  <path class="m" d="M145 150 H449" marker-end="url(#a)"/>
+  <text class="t" x="160" y="142">POST /interviews/:id/live</text>
+  <rect class="note" x="470" y="130" width="290" height="92" rx="8"/>
+  <text class="n" x="482" y="150">owner check, quota under a per-user lock,</text>
+  <text class="n" x="482" y="168">close any other open session, build the</text>
+  <text class="n" x="482" y="186">instructions from the stored plan, record</text>
+  <text class="n" x="482" y="204">a live_sessions row with max_seconds</text>
+
+  <path class="m" d="M455 240 H769" marker-end="url(#a)"/>
+  <text class="t" x="470" y="232">mint: instructions + end_question tool locked in</text>
+  <path class="m" d="M775 270 H461" marker-end="url(#a)"/>
+  <text class="t" x="560" y="262">ek_... secret or ephemeral token</text>
+  <path class="m" d="M455 300 H151" marker-end="url(#a)"/>
+  <text class="t" x="180" y="292">LiveSessionGrant (no provider key)</text>
+
+  <path class="m" d="M145 340 H449" marker-end="url(#a)"/>
+  <text class="t" x="160" y="332">OpenAI: SDP offer to /api/realtime/openai/calls</text>
+  <path class="m" d="M455 360 H769" marker-end="url(#a)"/>
+  <text class="t" x="470" y="352">relayed once; call id recorded</text>
+
+  <path class="mv" d="M145 400 H769" marker-end="url(#v)"/>
+  <path class="mv" d="M775 420 H151" marker-end="url(#v)"/>
+  <text class="t" x="300" y="392" style="fill:#6D52F0;font-weight:600">live audio both ways (Gemini: WebSocket, no relay)</text>
+  <text class="n" x="300" y="440">the interviewer asks, follows up, then calls end_question (no ratings)</text>
+
+  <path class="m" d="M145 480 H449" marker-end="url(#a)"/>
+  <text class="t" x="160" y="472">POST .../live/:sid/end</text>
+  <path class="m" d="M455 500 H769" marker-end="url(#a)"/>
+  <text class="t" x="470" y="492">hang up (OpenAI); seconds measured on the server</text>
+
+  <path class="m" d="M145 550 H449" marker-end="url(#a)"/>
+  <text class="t" x="160" y="542">POST /answers { transcript | code }</text>
+  <path class="m" d="M455 575 H1059" marker-end="url(#a)"/>
+  <text class="t" x="600" y="567">job interview.score (version = answer updated_at)</text>
+  <rect class="note" x="900" y="595" width="270" height="72" rx="8"/>
+  <text class="n" x="912" y="615">text model scores domain and</text>
+  <text class="n" x="912" y="633">communication 1 to 100, writes feedback;</text>
+  <text class="n" x="912" y="651">an empty answer gets the floor</text>
+  <text class="n" x="60" y="690">Client-sent ratings are rejected by the schema. The next question opens a new session with new instructions.</text>
+</svg>

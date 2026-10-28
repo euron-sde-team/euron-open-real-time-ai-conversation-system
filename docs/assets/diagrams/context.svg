@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="640" viewBox="0 0 1200 640" role="img" aria-labelledby="title desc">
+  <title id="title">Euron Open Conversation in context</title>
+  <desc id="desc">Candidates and admins use one Next.js web app, which proxies /api to an Express API. The API and a BullMQ worker share PostgreSQL 16 and Redis 7. The API mints short-lived realtime credentials from OpenAI Realtime or Gemini Live and relays the OpenAI WebRTC handshake; the browser then streams audio straight to the provider. The worker calls a text model (OpenAI, Gemini, Anthropic or any OpenAI-compatible endpoint) to write interview plans and score answers. Mail goes through SES or SMTP.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 10 5 0 10z" fill="#6B7280"/></marker>
+    <marker id="v" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 10 5 0 10z" fill="#6D52F0"/></marker>
+    <style>
+      .bg{fill:#FFFFFF}
+      .box{fill:#F7F7FB;stroke:#D8D8E6;stroke-width:1.2}
+      .sys{fill:#F1EEFF;stroke:#B9ACF7;stroke-width:1.2}
+      .ext{fill:#FFFFFF;stroke:#C9CAD6;stroke-width:1.2;stroke-dasharray:5 4}
+      .h{font:600 16px Inter,Segoe UI,Helvetica,Arial,sans-serif;fill:#111322}
+      .t{font:13px Inter,Segoe UI,Helvetica,Arial,sans-serif;fill:#4B5163}
+      .s{font:600 12px Inter,Segoe UI,Helvetica,Arial,sans-serif;fill:#6D52F0;letter-spacing:.06em}
+      .l{font:12px Inter,Segoe UI,Helvetica,Arial,sans-serif;fill:#4B5163}
+      .ln{stroke:#6B7280;stroke-width:1.4;fill:none}
+      .lv{stroke:#6D52F0;stroke-width:2;fill:none}
+    </style>
+  </defs>
+  <rect class="bg" width="1200" height="640" rx="18"/>
+  <text class="h" x="40" y="44" style="font-size:20px">Euron Open Conversation in context</text>
+
+  <!-- People -->
+  <rect class="box" x="40" y="90" width="210" height="110" rx="14"/>
+  <text class="h" x="60" y="122">Candidate</text>
+  <text class="t" x="60" y="146">Browser: microphone,</text>
+  <text class="t" x="60" y="164">camera (proctoring),</text>
+  <text class="t" x="60" y="182">code editor</text>
+  <rect class="box" x="40" y="230" width="210" height="80" rx="14"/>
+  <text class="h" x="60" y="262">Admin</text>
+  <text class="t" x="60" y="286">/admin control plane</text>
+
+  <!-- System boundary -->
+  <rect x="300" y="70" width="520" height="430" rx="18" fill="none" stroke="#B9ACF7" stroke-width="1.4" stroke-dasharray="6 5"/>
+  <text class="s" x="320" y="96">THE SYSTEM</text>
+  <rect class="sys" x="330" y="115" width="200" height="90" rx="14"/>
+  <text class="h" x="350" y="146">Web (Next.js)</text>
+  <text class="t" x="350" y="168">pages, CSP, /api proxy</text>
+  <text class="t" x="350" y="186">live room, transports</text>
+  <rect class="sys" x="590" y="115" width="200" height="90" rx="14"/>
+  <text class="h" x="610" y="146">API (Express)</text>
+  <text class="t" x="610" y="168">auth, interviews, quotas</text>
+  <text class="t" x="610" y="186">credential mint, SDP relay</text>
+  <rect class="sys" x="590" y="240" width="200" height="80" rx="14"/>
+  <text class="h" x="610" y="271">Worker (BullMQ)</text>
+  <text class="t" x="610" y="293">plan, score, sweep, upkeep</text>
+  <rect class="box" x="330" y="360" width="200" height="110" rx="14"/>
+  <text class="h" x="350" y="391">PostgreSQL 16</text>
+  <text class="t" x="350" y="413">users, interviews, answers,</text>
+  <text class="t" x="350" y="431">live sessions, shares, usage,</text>
+  <text class="t" x="350" y="449">audit log</text>
+  <rect class="box" x="590" y="360" width="200" height="110" rx="14"/>
+  <text class="h" x="610" y="391">Redis 7</text>
+  <text class="t" x="610" y="413">job queues, rate limits</text>
+
+  <!-- External -->
+  <rect class="ext" x="890" y="90" width="270" height="120" rx="14"/>
+  <text class="h" x="910" y="122">Realtime voice</text>
+  <text class="t" x="910" y="146">OpenAI Realtime (WebRTC)</text>
+  <text class="t" x="910" y="164">Gemini Live (WebSocket)</text>
+  <text class="t" x="910" y="182">instructions locked by the API</text>
+  <rect class="ext" x="890" y="240" width="270" height="100" rx="14"/>
+  <text class="h" x="910" y="272">Text model</text>
+  <text class="t" x="910" y="296">OpenAI, Gemini, Anthropic or</text>
+  <text class="t" x="910" y="314">any OpenAI-compatible endpoint</text>
+  <rect class="ext" x="890" y="370" width="270" height="80" rx="14"/>
+  <text class="h" x="910" y="402">Mail</text>
+  <text class="t" x="910" y="424">SES or SMTP</text>
+
+  <!-- Lines -->
+  <path class="ln" d="M250 145 H325" marker-end="url(#a)"/>
+  <path class="ln" d="M250 270 H290 V185 H325" marker-end="url(#a)"/>
+  <path class="ln" d="M530 160 H585" marker-end="url(#a)"/>
+  <text class="l" x="540" y="152">/api</text>
+  <path class="ln" d="M690 205 V235" marker-end="url(#a)"/>
+  <path class="ln" d="M640 205 V230 H480 V355" marker-end="url(#a)"/>
+  <path class="ln" d="M690 320 V355" marker-end="url(#a)"/>
+  <path class="ln" d="M790 150 H885" marker-end="url(#a)"/>
+  <text class="l" x="800" y="142">mint credential, hang up</text>
+  <path class="ln" d="M790 280 H885" marker-end="url(#a)"/>
+  <text class="l" x="800" y="272">plan, score</text>
+  <path class="ln" d="M760 205 V230 H850 V410 H885" marker-end="url(#a)"/>
+  <path class="lv" d="M145 90 V60 H1025 V85" marker-end="url(#v)"/>
+  <text class="l" x="420" y="54" style="fill:#6D52F0;font-weight:600">live audio, browser to provider, with the short-lived credential</text>
+
+  <text class="t" x="40" y="560">The browser never holds a provider key and never writes the interviewer's instructions. Resumes are read in memory and never stored.</text>
+  <text class="t" x="40" y="582">Transcripts are reported by the browser after each question; only the server writes scores.</text>
+</svg>

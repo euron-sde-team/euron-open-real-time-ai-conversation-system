@@ -1,0 +1,29 @@
+# Copy to terraform.tfvars (git-ignored) and replace every placeholder.
+region      = "us-east-1"
+name_prefix = "conv-dev" # 3-24 lowercase letters, digits, hyphens
+
+domain          = "app.dev.example.com" # one host: the web app and /api/*
+route53_zone_id = "<ROUTE53_HOSTED_ZONE_ID>" # automatic certificates + DNS; or set certificate_arn instead
+# mail_domain   = "example.com"              # defaults to domain
+
+# image_tag is passed by `make aws-deploy` (the git commit); set it here to pin a release.
+# image_tag = "0.1.0"
+
+# alarm_email = "oncall@example.com"
+
+# Graviton tasks (cheaper). Build the images to match: PLATFORM=linux/arm64 make aws-deploy
+# cpu_architecture = "ARM64"
+
+# Model providers. Realtime voice needs an openai (Realtime) or gemini (Live) key; plans
+# and scoring use whichever models the admin picks. The keys live in <name_prefix>/provider-keys as one JSON object keyed
+# by provider slug (PROVIDER_KEYS). By default it is created with "set-me" placeholders,
+# which keeps the keys out of Terraform state; put the real ones in by hand:
+#   aws secretsmanager put-secret-value --secret-id <name_prefix>/provider-keys \
+#     --secret-string '{"openai":"<key>","gemini":"<key>"}'
+# then roll the api and worker (make aws-deploy, or force a new deployment). Or pass
+# them here (they then land in Terraform state):
+# provider_keys = { openai = "<OPENAI_API_KEY>" }
+
+# Realtime voice origins the browser may connect to (the web app's CSP connect-src).
+# The default allows Gemini Live; OpenAI's WebRTC handshake goes through /api.
+# realtime_origins = "wss://generativelanguage.googleapis.com"
